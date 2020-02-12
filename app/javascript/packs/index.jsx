@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import rootReducer from './redux/reducers/rootReducer';
 import thunkMiddleware  from 'redux-thunk';
 
-
+import 'bulma/bulma';
 import './app.scss';
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
