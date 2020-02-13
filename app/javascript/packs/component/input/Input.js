@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, ErrorMessage } from 'formik';
-import classes from './input';
+import classes from './input.module.scss';
 
 
 const FormikInput = props => {

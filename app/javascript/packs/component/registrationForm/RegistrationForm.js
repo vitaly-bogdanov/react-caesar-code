@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import classes from './registrationForm';
+import classes from './registrationForm.module.scss';
 import Input from '../input/Input';
 import { getValidateClassHalper } from '../../config/halpers';
 import { 
