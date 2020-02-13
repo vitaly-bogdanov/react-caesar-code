@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import Input from '../input/Input';
 import { validateEmail, validatePassword } from '../../config/validations';
-import classes from './authorizationForm.module.scss';
+import classes from './authorizationForm';
 import { getValidateClassHalper } from '../../config/halpers';
 import pages from '../../config/pages';
 import Alert from '../alert/Alert';
