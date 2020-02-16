@@ -31,22 +31,8 @@ class CiphersController < ApplicationController
   def encryption
     text = params[:cipher][:text].downcase
     key = params[:cipher][:key].to_i
-    cipher = text.split('').map do |smb|
-      ltr_num = alphabet.index(smb)
-      if ltr_num.nil?
-        smb
-      else
-        ltr_num
-      end
-    end
-    cipher.map! do |el|
-      if el.is_a? Integer
-        encrypt_alphabet(key).at(el)
-      else
-        el
-      end
-    end
-    new_cipher = Cipher.new(code: cipher.join(''), secret_key: key)
+    
+    new_cipher = Cipher.encrypt(text, key)
     if new_cipher.save
       render json: { code: new_cipher.code, secret_key: new_cipher.secret_key }, status: 201
     else

@@ -1,42 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Admin from '../../../layouts/admin/Admin';
 import DecryptionFormContainer from '../../../component/decryptionForm/DecryptionFormContainer';
-import axiosCSRF from '../../../config/axiosCSRF';
 
-const Decryption = props => {
-  let [text, setText] = useState('');
-
-  const decryption = async values => {
-    try {
-      let response = await axiosCSRF.post('/decryption', {
-        cipher: { ...values }
-      });
-
-      setText(response.data.text);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  return (
-    <Admin push={props.history.push}>
-      <div className="container">
-        <section className="hero">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">Расшифровать</h1>
-              <h2 className="subtitle">Введите шифр и ключ</h2>
-              <DecryptionFormContainer />
-              <hr />
-              <div>
-              <p>Текст: <strong>{text}</strong></p>
-              </div>
-            </div>
+const Decryption = props => (
+  <Admin push={props.history.push}>
+    <div className="container">
+      <section className="hero">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">Расшифровать</h1>
+            <h2 className="subtitle">Введите шифр и ключ</h2>
+            <DecryptionFormContainer />
           </div>
-        </section>
-      </div>
-    </Admin>
-  )
-}
+        </div>
+      </section>
+    </div>
+  </Admin>
+)
 
 export default Decryption;

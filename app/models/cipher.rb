@@ -14,4 +14,28 @@ class Cipher < ApplicationRecord
       less_than_or_equal_to: 19 
     }
 
+  def decrypt(cipher, key)
+    
+  end
+
+  def encrypt(text, key)
+
+    cipher = text.split('').map do |smb|
+      ltr_num = alphabet.index(smb)
+      if ltr_num.nil?
+        smb
+      else
+        ltr_num
+      end
+    end
+    cipher.map! do |el|
+      if el.is_a? Integer
+        encrypt_alphabet(key).at(el)
+      else
+        el
+      end
+    end
+    
+    return self.new(code: cipher.join(''), secret_key: key)
+  end
 end
