@@ -49,6 +49,8 @@ class CiphersController < ApplicationController
     new_cipher = Cipher.new(code: cipher.join(''), secret_key: key)
     if new_cipher.save
       render json: { code: new_cipher.code, secret_key: new_cipher.secret_key }, status: 201
+    else
+      render json: {}, status: 422
     end
   end
 

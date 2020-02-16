@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2020_02_09_093138) do
 
   create_table "ciphers", force: :cascade do |t|
-    t.text "code"
-    t.string "secret_key"
+    t.text "code", null: false
+    t.integer "secret_key", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

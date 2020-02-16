@@ -1,28 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PageNotFound from '../pages/PageNotFound';
 import pages from './pages';
-import axiosCSRF from '../config/axiosCSRF';
-import { setLoginStatusCreator } from '../redux/actions/actionCreators';
-
 
 const AppRoutes = props => {
 
-  const checkLoggedIn = () => {
-    axiosCSRF.get('/authentication').then(response => {
-      localStorage.loggedIn = response.data.loggedIn;
-      localStorage.user = response.data.user;
-      props.loggedInAction(response.data);
-    }).catch(error => {
-      console.log(error);
-    });
-  }
-
-  useEffect(() => {
-    checkLoggedIn();
-  }, []);
-  
   return (
     <Switch>
       {
@@ -51,8 +34,4 @@ const mapStateToProps = state => ({
   loggedIn: state.authorization.loggedIn
 });
 
-const mapDispatchToProps = dispatch => ({
-  loggedInAction: (data) => dispatch(setLoginStatusCreator(data))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes);
+export default connect(mapStateToProps)(AppRoutes);

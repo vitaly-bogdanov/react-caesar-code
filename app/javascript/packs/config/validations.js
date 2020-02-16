@@ -35,10 +35,10 @@ export const confirmValidatePasswordCreator = (passwordConfirm, touchedPasswordC
   
 export const textValidationCreator = (min, max) => (value) => {
   let error;
-  if (value.length > max) {
+  if (value.length >= max) {
     error = `Максимальное количество символов: ${max}. Введено: ${value.length}.`
   }
-  if (value.length < min) {
+  if (value.length <= min) {
     error = `Минимальное количество символов: ${min}. Введено: ${value.length}.`
   }
   return error;

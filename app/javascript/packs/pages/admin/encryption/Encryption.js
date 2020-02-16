@@ -7,6 +7,8 @@ const Encryption = props => {
   let [cipher, setCipher] = useState('');
 
   const encryption = async values => {
+    values.text = values.text.trim();
+    values.key = values.key.trim();
     try {
       let response = await axiosCSRF.post('/encryption', {
         cipher: { ...values }

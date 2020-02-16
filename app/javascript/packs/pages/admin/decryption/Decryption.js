@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Admin from '../../../layouts/admin/Admin';
-import DecryptionForm from '../../../component/decryptionForm/DecryptionForm';
+import DecryptionFormContainer from '../../../component/decryptionForm/DecryptionFormContainer';
 import axiosCSRF from '../../../config/axiosCSRF';
 
 const Decryption = props => {
@@ -26,7 +26,7 @@ const Decryption = props => {
             <div className="container">
               <h1 className="title">Расшифровать</h1>
               <h2 className="subtitle">Введите шифр и ключ</h2>
-              <DecryptionForm decryption={decryption} />
+              <DecryptionFormContainer />
               <hr />
               <div>
               <p>Текст: <strong>{text}</strong></p>
