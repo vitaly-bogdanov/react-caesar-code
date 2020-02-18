@@ -1,15 +1,19 @@
 import React, { Fragment, useState } from 'react';
 import EncryptionForm from './EncryptionForm';
+import axiosCSRF from '../../config/axiosCSRF';
 
 const EncryptionFormContainer = props => {
   let [cipher, setCipher] = useState('');
   
   const encryption = async values => {
-    values.text = values.text.trim();
-    values.key = values.key.trim();
+    let data = {
+      text: values.text.trim().toLowerCase(),
+      key: values.key.trim()
+    };
+
     try {
       let response = await axiosCSRF.post('/encryption', {
-        cipher: { ...values }
+        cipher: { ...data }
       });
 
       setCipher(response.data.code);

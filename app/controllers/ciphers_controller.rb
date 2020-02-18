@@ -1,38 +1,21 @@
 class CiphersController < ApplicationController
+ 
+  before_action :set_key_and_text, only: [:decryption, :encryption]
+
   def index
     ciphers = Cipher.all
+
     render json: ciphers, status: 200
   end
 
   def decryption
-    text = params[:cipher][:cipher].downcase
-    key = params[:cipher][:key].to_i
-
-    message = text.split('').map do |smb|
-      ltr_num = encrypt_alphabet(key).index(smb)
-      if ltr_num.nil?
-        smb
-      else
-        ltr_num
-      end
-    end
-
-    message.map! do |el|
-      if el.is_a? Integer
-        alphabet.at(el)
-      else
-        el
-      end
-    end
+    message = Cipher.decrypt(@text, @key)
     
     render json: { text: message }, status: 200
   end
 
   def encryption
-    text = params[:cipher][:text].downcase
-    key = params[:cipher][:key].to_i
-    
-    new_cipher = Cipher.encrypt(text, key)
+    new_cipher = Cipher.encrypt(@text, @key)
     if new_cipher.save
       render json: { code: new_cipher.code, secret_key: new_cipher.secret_key }, status: 201
     else
@@ -40,27 +23,20 @@ class CiphersController < ApplicationController
     end
   end
 
+  def destroy
+    cipher = Cipher.find(params[:id])
+    if cipher.destroy
+      render json: {}, status: 200
+    else
+      render json: {}, status: 422
+    end
+  end
+
   private
 
-  def encrypt_alphabet(key)
-    alphabet[key..-1] + alphabet[0..key]
+  def set_key_and_text
+    @text = params[:cipher][:text].downcase
+    @key = params[:cipher][:key].to_i
   end
 
-  def alphabet
-    [
-      'а', 'б', 'в', 'г',
-      'д', 'е', 'ё', 'ж',
-      'з', 'и', 'й', 'к',
-      'л', 'м', 'н', 'о', 
-      'п', 'р', 'с', 'т',
-      'у', 'ф', 'х', 'ц',
-      'ч', 'ш', 'щ', 'ъ',
-      'ы', 'ь', 'э', 'ю',
-      'я'
-    ]
-  end
-
-  def cipher_params
-    params.require(:cipher).permit(:code, :secret_key)
-  end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get    '/ciphers',        to: 'ciphers#index'
   post   '/decryption',     to: 'ciphers#decryption'
   post   '/encryption',     to: 'ciphers#encryption'
+  delete '/destroy/:id',        to: 'ciphers#destroy'
 
   match '*path',            to: 'pages#index', via: :all
 end

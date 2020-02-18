@@ -5,11 +5,14 @@ import axiosCSRF from '../../config/axiosCSRF';
 const DecryptionFormContainer = props => {
   let [text, setText] = useState('');
   const decryption = async values => {
-    values.cipher = values.cipher.trim();
-    values.key = values.key.trim();
+    let data = {
+      text: values.cipher.trim().toLowerCase(),
+      key: values.key.trim()
+    };
+
     try {
       let response = await axiosCSRF.post('/decryption', {
-        cipher: { ...values }
+        cipher: { ...data }
       });
       setText(response.data.text);
     } catch (error) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Admin from '../../../layouts/admin/Admin';
-import EncryptionForm from '../../../component/encryptionForm/EncryptionForm';
+import EncryptionFormContainer from '../../../component/encryptionForm/EncryptionFormContainer';
 
 const Encryption = props => (
   <Admin push={props.history.push}>
@@ -11,7 +11,7 @@ const Encryption = props => (
             <h1 className="title">Зашифровать</h1>
             <h2 className="subtitle">Введите любое сообщение(только руский алфавит и символы)</h2>
             <p>Сохранится после шифрования в БД</p>
-            <EncryptionForm />
+            <EncryptionFormContainer />
           </div>
         </div>
       </section>

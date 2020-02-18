@@ -5,12 +5,15 @@ import { connect } from 'react-redux';
 import { setLoginStatusCreator } from '../../redux/actions/actionCreators';
 
 const AuthorizationFormContainer = props => {
-
+  
   const login = async values => {
-
+    let data = {
+      email: values.email.trim().toLowerCase(),
+      password: values.password.trim()
+    };
     try {
       let response = await axiosCSRF.post('/authentication', {
-        user: { ...values }
+        user: { ...data }
       });
       props.loggedInAction(response.data);
       return response.status;

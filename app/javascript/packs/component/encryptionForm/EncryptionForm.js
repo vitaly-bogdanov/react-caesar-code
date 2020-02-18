@@ -14,7 +14,6 @@ const initialValues = {
 }
 
 const EncryptionForm = props => {
-  
   return (
     <Formik
       initialValues={initialValues}

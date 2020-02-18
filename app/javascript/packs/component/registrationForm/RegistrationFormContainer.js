@@ -8,12 +8,16 @@ import { setLoginStatusCreator } from '../../redux/actions/actionCreators';
 const RegistrationFormContainer = props => {
 
   const registrationNewUser = async values => {
+    let data = {
+      email: values.email.trim().toLowerCase(),
+      password: values.password.trim(),
+      confirmPassword: values.confirmPassword.trim()
+    };
 
     try {
       let response = await axiosCSRF.post('/user', { 
-        user: { ...values }
+        user: { ...data }
       });
-
       props.loggedInAction(response.data);
       return { errors: [], status: response.status };
     } catch (error) {

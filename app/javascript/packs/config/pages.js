@@ -3,8 +3,7 @@ import Authorization from '../pages/client/authorization/Authorization';
 import Registration from '../pages/client/registration/Registration';
 import Decryption from '../pages/admin/decryption/Decryption';
 import Encryption from '../pages/admin/encryption/Encryption';
-import AllCipher from '../pages/admin/allCipher/AllCipher';
-import PageNotFound from '../pages/PageNotFound';
+import AllCipher from '../pages/admin/allCiphers/AllCiphers';
 
 const pages = {
   home: {
