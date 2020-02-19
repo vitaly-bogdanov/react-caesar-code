@@ -36,8 +36,12 @@ const EncryptionFormContainer = props => {
   );
 }
 
+const mapStateToProps = state => ({
+  userId: state.authorization.user.id
+});
+
 const mapDispatchToProps = dispatch => ({
   addCipherAction: (data) => dispatch(addCipherCreator(data))
 });
 
-export default connect(null, mapDispatchToProps)(EncryptionFormContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(EncryptionFormContainer);
