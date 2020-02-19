@@ -4,19 +4,12 @@ import {
   setLoginStatusCreator
 } from './actions/actionCreators';
 
-export const getAllCiphersThunk = () => dispatch => {
-  axiosCSRF.get('/ciphers').then(response => {
-    dispatch(getAllCiphersCreator(response.data));
-  }).catch(error => {
-    console.log(error);
-  });
-}
-
 export const checkLoggedInThunk = () => dispatch => {
   axiosCSRF.get('/authentication').then(response => {
     localStorage.loggedIn = response.data.loggedIn;
     localStorage.user = response.data.user;
-    dispatch(setLoginStatusCreator(response.data));
+    dispatch(setLoginStatusCreator({loggedIn: response.data.loggedIn, user: response.data.user}));
+    dispatch(getAllCiphersCreator(response.data.ciphers));
   }).catch(error => {
     console.log(error);
   });

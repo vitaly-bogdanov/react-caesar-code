@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import EncryptionForm from './EncryptionForm';
 import axiosCSRF from '../../config/axiosCSRF';
+import { connect } from 'react-redux';
+import { addCipherCreator } from '../../redux/actions/actionCreators';
 
 const EncryptionFormContainer = props => {
   let [cipher, setCipher] = useState('');
@@ -16,6 +18,7 @@ const EncryptionFormContainer = props => {
         cipher: { ...data }
       });
 
+      props.addCipherAction(response.data);
       setCipher(response.data.code);
     } catch (error) {
       console.error(error);
@@ -33,4 +36,8 @@ const EncryptionFormContainer = props => {
   );
 }
 
-export default EncryptionFormContainer;
+const mapDispatchToProps = dispatch => ({
+  addCipherAction: (data) => dispatch(addCipherCreator(data))
+});
+
+export default connect(null, mapDispatchToProps)(EncryptionFormContainer);

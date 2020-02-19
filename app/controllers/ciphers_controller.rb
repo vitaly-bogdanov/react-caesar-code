@@ -17,7 +17,7 @@ class CiphersController < ApplicationController
   def encryption
     new_cipher = Cipher.encrypt(@text, @key)
     if new_cipher.save
-      render json: { code: new_cipher.code, secret_key: new_cipher.secret_key }, status: 201
+      render json: new_cipher, status: 201
     else
       render json: {}, status: 422
     end

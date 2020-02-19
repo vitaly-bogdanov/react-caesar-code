@@ -9,10 +9,6 @@ import { getAllCiphersThunk } from '../../redux/middlewares';
 
 const Admin = props => {
 
-  useEffect(() => {
-    props.getAllCiphers();
-  }, []);
-
   const logout = () => {
     axiosCSRF.delete('/authentication').then(response => {
       localStorage.removeItem('loggedIn');
@@ -73,8 +69,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logoutAction: (data) => dispatch(setLoginStatusCreator(data)),
-  getAllCiphers: () => dispatch(getAllCiphersThunk())
+  logoutAction: (data) => dispatch(setLoginStatusCreator(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);

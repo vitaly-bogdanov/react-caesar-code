@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   post   '/authentication', to: 'sessions#login'
   delete '/authentication', to: 'sessions#logout'
 
-  get    '/ciphers',        to: 'ciphers#index'
+  get    '/ciphers', to: 'ciphers#index'
+  
   post   '/decryption',     to: 'ciphers#decryption'
   post   '/encryption',     to: 'ciphers#encryption'
-  delete '/destroy/:id',        to: 'ciphers#destroy'
+  delete '/destroy/:id',    to: 'ciphers#destroy'
 
   match '*path',            to: 'pages#index', via: :all
 end
