@@ -8,7 +8,7 @@ const CiphersListContainer = props => {
 
   const destroy = async id => {
     try {
-      let response = await axiosCSRF.delete(`/destroy/${id}`);
+      let response = await axiosCSRF.delete(`/destroy/${id}/${props.userId}`);
       if (response.status == 200) {
         props.destroyAction(id);
       }
@@ -26,7 +26,8 @@ const CiphersListContainer = props => {
 }
 
 const mapStateToProps = state => ({
-  ciphers: state.ciphers.ciphers
+  ciphers: state.ciphers.ciphers,
+  userId: state.authorization.user.id
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:user][:email]).try(:authenticate, params[:user][:password])
     if user
       session[:user_id] = user.id
-      session[:token] = user.password_digest
       ciphers = Cipher.all
       render json: { loggedIn: true, user: user, ciphers: ciphers }, status: 201
     else

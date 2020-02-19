@@ -1,12 +1,7 @@
 class CiphersController < ApplicationController
- 
+  include CurrentUserConcern
   before_action :set_key_and_text, only: [:decryption, :encryption]
-
-  def index
-    ciphers = Cipher.all
-
-    render json: ciphers, status: 200
-  end
+  before_action :session_verification, only: [:destroy, :decryption, :encryption]
 
   def decryption
     message = Cipher.decrypt(@text, @key)
@@ -25,6 +20,7 @@ class CiphersController < ApplicationController
 
   def destroy
     cipher = Cipher.find(params[:id])
+
     if cipher.destroy
       render json: {}, status: 200
     else
@@ -37,6 +33,12 @@ class CiphersController < ApplicationController
   def set_key_and_text
     @text = params[:cipher][:text].downcase
     @key = params[:cipher][:key].to_i
+  end
+
+  def session_verification
+    if @current_user.nil?
+      render json: {}, status: 401
+    end
   end
 
 end
