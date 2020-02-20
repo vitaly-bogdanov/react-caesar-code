@@ -12,7 +12,7 @@ const DecryptionFormContainer = props => {
     };
 
     try {
-      let response = await axiosCSRF.post(`/decryption/${props.userId}`, {
+      let response = await axiosCSRF.post(`/decryption`, {
         cipher: { ...data }
       });
       setText(response.data.text);

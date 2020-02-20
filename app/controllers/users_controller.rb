@@ -7,7 +7,8 @@ class UsersController < ApplicationController
 
     if user.save
       session[:user_id] = user.id
-      render json: { loggedIn: true, user: user }, status: 201
+      ciphers = Cipher.all
+      render json: { loggedIn: true, user: user, ciphers: ciphers }, status: 201
     else
       render json: { error: user.errors }, status: 403
     end

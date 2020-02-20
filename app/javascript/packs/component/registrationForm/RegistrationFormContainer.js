@@ -2,7 +2,10 @@ import React from 'react';
 import RegistrationForm from './RegistrationForm';
 import axiosCSRF from '../../config/axiosCSRF';
 import { connect } from 'react-redux';
-import { setLoginStatusCreator } from '../../redux/actions/actionCreators';
+import { 
+  setLoginStatusCreator,
+  getAllCiphersCreator 
+} from '../../redux/actions/actionCreators';
 
 
 const RegistrationFormContainer = props => {
@@ -18,7 +21,8 @@ const RegistrationFormContainer = props => {
       let response = await axiosCSRF.post('/user', { 
         user: { ...data }
       });
-      props.loggedInAction(response.data);
+      props.loggedInAction({loggedIn: response.data.loggedIn, user: response.data.user});
+      props.getAllCiphersAction(response.data.ciphers);
       return { errors: [], status: response.status };
     } catch (error) {
       console.error(error);
@@ -38,7 +42,8 @@ const RegistrationFormContainer = props => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loggedInAction: (data) => dispatch(setLoginStatusCreator(data))
+  loggedInAction: (data) => dispatch(setLoginStatusCreator(data)),
+  getAllCiphersAction: (data) => dispatch(getAllCiphersCreator(data))
 })
 
 export default connect(null, mapDispatchToProps)(RegistrationFormContainer);

@@ -8,7 +8,7 @@ const CiphersListContainer = props => {
 
   const destroy = async id => {
     try {
-      let response = await axiosCSRF.delete(`/destroy/${id}/${props.userId}`);
+      let response = await axiosCSRF.delete(`/destroy/${id}`);
       if (response.status == 200) {
         props.destroyAction(id);
       }
