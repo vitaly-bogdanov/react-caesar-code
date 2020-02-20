@@ -6,7 +6,7 @@ import {
   setLoginStatusCreator,
   getAllCiphersCreator 
 } from '../../redux/actions/actionCreators';
-
+import { loggedInLocalStorageHalper } from '../../config/halpers';
 
 const RegistrationFormContainer = props => {
 
@@ -21,6 +21,7 @@ const RegistrationFormContainer = props => {
       let response = await axiosCSRF.post('/user', { 
         user: { ...data }
       });
+      loggedInLocalStorageHalper(response.data.loggedIn, response.data.user);
       props.loggedInAction({loggedIn: response.data.loggedIn, user: response.data.user});
       props.getAllCiphersAction(response.data.ciphers);
       return { errors: [], status: response.status };

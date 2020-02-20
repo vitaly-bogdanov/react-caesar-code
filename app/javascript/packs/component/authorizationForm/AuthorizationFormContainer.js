@@ -6,6 +6,7 @@ import {
   setLoginStatusCreator,
   getAllCiphersCreator
 } from '../../redux/actions/actionCreators';
+import { loggedInLocalStorageHalper } from '../../config/halpers';
 
 const AuthorizationFormContainer = props => {
   
@@ -18,6 +19,7 @@ const AuthorizationFormContainer = props => {
       let response = await axiosCSRF.post('/authentication', {
         user: { ...data }
       });
+      loggedInLocalStorageHalper(response.data.loggedIn, response.data.user);
       props.setLoginStatusAction({loggedIn: response.data.loggedIn, user: response.data.user });
       props.getAllCiphersAction(response.data.ciphers);
       return response.status;

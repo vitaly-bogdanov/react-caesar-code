@@ -3,11 +3,11 @@ import {
   getAllCiphersCreator,
   setLoginStatusCreator
 } from './actions/actionCreators';
+import { loggedInLocalStorageHalper } from '../config/halpers';
 
 export const checkLoggedInThunk = () => dispatch => {
   axiosCSRF.get('/authentication').then(response => {
-    localStorage.loggedIn = response.data.loggedIn;
-    localStorage.user = response.data.user;
+    loggedInLocalStorageHalper(response.data.loggedIn, response.data.user);
     dispatch(setLoginStatusCreator({loggedIn: response.data.loggedIn, user: response.data.user}));
     dispatch(getAllCiphersCreator(response.data.ciphers));
   }).catch(error => {

@@ -5,3 +5,8 @@ export const getValidateClassHalper = (errors, touched) => {
     return 'is-info';
   }
 }
+
+export const loggedInLocalStorageHalper = (loggedIn, user) => {
+  localStorage.loggedIn = loggedIn;
+  localStorage.user = user;
+}
